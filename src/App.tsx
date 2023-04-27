@@ -12,18 +12,21 @@ function App() {
         {banknots: 'Rubls', value: 50, number: ' v1234567890'},
     ])
 
-    let currentMoney = money.filter((el) => {
-        return el.banknots === 'Rubls'
-    })
+    const [filter, setFilter] = useState('all')
+
+    let currentMoney = money;
+    if (filter === 'Dollars') {
+        currentMoney = money.filter((el) => {
+            return el.banknots === 'Dollars'
+        })
+    } else if (filter === 'Rubls') {
+        currentMoney = money.filter((el) => {
+            return el.banknots === 'Rubls'
+        })
+    }
 
     const OnClickFilterHandler = (name: string) => {
-        if (name === 'All') {
-            console.log('All')
-        } else if (name === 'Dollars') {
-            console.log('Dollars')
-        } else if (name === 'Rubls') {
-            console.log('Rubls')
-        }
+        setFilter(name);
     }
     return (
         <>
