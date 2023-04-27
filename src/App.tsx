@@ -1,21 +1,29 @@
 import React, {MouseEvent, useState} from 'react';
 
 function App() {
-    let [a, setA] = useState(1);
-    const OnClickHandler = () => {
-        setA(++a);
-        console.log(a);
-    }
-    const OnClickHandler2 = () => {
-        setA(0);
-        console.log(a);
-    }
+    const [money, setMoney] = useState([
+        { banknots: 'Dollars', value: 100, number: ' a1234567890' },
+        { banknots: 'Dollars', value: 50, number: ' z1234567890' },
+        { banknots: 'RUBLS', value: 100, number: ' w1234567890' },
+        { banknots: 'Dollars', value: 100, number: ' e1234567890' },
+        { banknots: 'Dollars', value: 50, number: ' c1234567890' },
+        { banknots: 'RUBLS', value: 100, number: ' r1234567890' },
+        { banknots: 'Dollars', value: 50, number: ' x1234567890' },
+        { banknots: 'RUBLS', value: 50, number: ' v1234567890' },
+    ])
     return (
-        <div>
-            <h1>{a}</h1>
-            <button onClick={OnClickHandler}>number</button>
-            <button onClick={OnClickHandler2}>0</button>
-        </div>
+        <ul>
+            {money.map((el, index)=>{
+                index+=1;
+                return(
+                    <li key={index}>
+                        <span>{el.banknots}</span>
+                        <span>{el.value}</span>
+                        <span>{el.number}</span>
+                    </li>
+                )
+            })}
+        </ul>
     );
 }
 
