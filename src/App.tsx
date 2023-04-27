@@ -1,5 +1,7 @@
 import React, {MouseEvent, useState} from 'react';
+import {NewComponent} from "./NewComponent";
 
+export type FilterType = 'All' | 'Rubls' | 'Dollars'
 function App() {
     const [money, setMoney] = useState([
         {banknots: 'Dollars', value: 100, number: ' a1234567890'},
@@ -12,7 +14,7 @@ function App() {
         {banknots: 'Rubls', value: 50, number: ' v1234567890'},
     ])
 
-    const [filter, setFilter] = useState('all')
+    const [filter, setFilter] = useState<FilterType>('All')
 
     let currentMoney = money;
     if (filter === 'Dollars') {
@@ -25,29 +27,11 @@ function App() {
         })
     }
 
-    const OnClickFilterHandler = (name: string) => {
+    const OnClickFilterHandler = (name: FilterType) => {
         setFilter(name);
     }
     return (
-        <>
-            <ul>
-                {currentMoney.map((el, index) => {
-                    index += 1;
-                    return (
-                        <li key={index}>
-                            <span>{el.banknots}</span>
-                            <span>{el.value}</span>
-                            <span>{el.number}</span>
-                        </li>
-                    )
-                })}
-            </ul>
-            <div>
-                <button onClick={() => OnClickFilterHandler('All')}>All</button>
-                <button onClick={() => OnClickFilterHandler('Dollars')}>Dollars</button>
-                <button onClick={() => OnClickFilterHandler('Rubls')}>Rubls</button>
-            </div>
-        </>
+        <NewComponent currentMoney={currentMoney} OnClickFilterHandler={OnClickFilterHandler}/>
     );
 }
 
